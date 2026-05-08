@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
+import { useAudio } from "../context/SoundContext";
 
 const projects = [
   {
@@ -29,6 +30,7 @@ const projects = [
 ];
 
 export default function Projects() {
+  const { playClick } = useAudio();
   return (
     <section id="projects" className="py-32">
       <div className="container mx-auto px-6">
@@ -50,6 +52,7 @@ export default function Projects() {
             <motion.div 
               key={project.title} 
               className="project-card group cursor-pointer relative"
+              onClick={playClick}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               whileHover={{ y: -10 }}

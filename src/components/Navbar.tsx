@@ -1,9 +1,10 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
-import { Menu, X, FlaskConical as Flask, Sun, Moon } from "lucide-react";
+import { Menu, X, FlaskConical as Flask, Sun, Moon, Volume2, VolumeX } from "lucide-react";
 import { cn } from "../lib/utils";
 import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "./ThemeProvider";
+import { useAudio } from "../context/SoundContext";
 
 const navItems = [
   { name: "About", href: "/#about" },
@@ -15,6 +16,7 @@ const navItems = [
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
+  const { isMuted, toggleMute, playClick } = useAudio();
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const { scrollY } = useScroll();
@@ -133,7 +135,10 @@ export default function Navbar() {
             );
           })}
           <motion.button
-            onClick={toggleTheme}
+            onClick={() => {
+              toggleTheme();
+              playClick();
+            }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             className="p-2 rounded-full glass-panel hover:bg-brand-blue hover:text-white transition-colors duration-300 text-text-main relative overflow-hidden"
@@ -152,8 +157,29 @@ export default function Navbar() {
             </AnimatePresence>
           </motion.button>
 
+          <motion.button
+            onClick={toggleMute}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            className="p-2 rounded-full glass-panel hover:bg-brand-blue hover:text-white transition-colors duration-300 text-text-main relative"
+            aria-label="Toggle sound"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={isMuted ? "muted" : "unmuted"}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
+              </motion.div>
+            </AnimatePresence>
+          </motion.button>
+
           <a
             href="/#contact"
+            onClick={playClick}
             className="px-5 py-2 rounded-full bg-text-main text-charcoal text-sm font-bold hover:bg-brand-blue hover:text-white transition-all duration-300"
           >
             Share Ideas
@@ -162,7 +188,19 @@ export default function Navbar() {
 
         <div className="flex items-center gap-4 md:hidden">
           <motion.button
-            onClick={toggleTheme}
+            onClick={toggleMute}
+            whileTap={{ scale: 0.9 }}
+            className="p-2 rounded-full glass-panel text-text-main"
+            aria-label="Toggle sound"
+          >
+            {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+          </motion.button>
+
+          <motion.button
+            onClick={() => {
+              toggleTheme();
+              playClick();
+            }}
             whileTap={{ scale: 0.9 }}
             className="p-2 rounded-full glass-panel text-text-main relative overflow-hidden"
             aria-label="Toggle theme"

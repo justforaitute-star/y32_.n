@@ -11,11 +11,13 @@ import SmoothScroll from "./components/SmoothScroll";
 import LoadingScreen from "./components/LoadingScreen";
 import CustomCursor from "./components/CustomCursor";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { SoundProvider } from "./context/SoundContext";
 
 export default function App() {
   return (
     <ThemeProvider>
-      <Router>
+      <SoundProvider>
+        <Router>
         <SmoothScroll>
           <LoadingScreen />
           <CustomCursor />
@@ -51,6 +53,7 @@ export default function App() {
           <div className="fixed inset-0 pointer-events-none z-[99] opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]" />
         </SmoothScroll>
       </Router>
+      </SoundProvider>
     </ThemeProvider>
   );
 }

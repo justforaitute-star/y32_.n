@@ -1,7 +1,9 @@
 import { motion } from "motion/react";
 import { Mail, Github, Instagram, MapPin } from "lucide-react";
+import { useAudio } from "../context/SoundContext";
 
 export default function Contact() {
+  const { playClick } = useAudio();
   return (
     <section id="contact" className="py-32">
       <div className="container mx-auto px-6">
@@ -41,13 +43,26 @@ export default function Contact() {
               </div>
               
               <div className="flex items-center gap-4 mt-12">
-                <a href="https://www.instagram.com/y32_.n/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-brand-blue hover:text-white transition-all duration-300">
+                <a 
+                  href="https://www.instagram.com/y32_.n/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  onClick={playClick}
+                  className="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-brand-blue hover:text-white transition-all duration-300"
+                >
                   <Instagram size={20} />
                 </a>
-                <button className="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-brand-blue hover:text-white transition-all duration-300 text-text-main">
+                <button 
+                  onClick={playClick}
+                  className="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-brand-blue hover:text-white transition-all duration-300 text-text-main"
+                >
                   <Github size={20} />
                 </button>
-                <a href="mailto:yezenabdurahman@gmail.com" className="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-brand-blue hover:text-white transition-all duration-300">
+                <a 
+                  href="mailto:yezenabdurahman@gmail.com" 
+                  onClick={playClick}
+                  className="w-12 h-12 rounded-full glass-panel flex items-center justify-center hover:bg-brand-blue hover:text-white transition-all duration-300"
+                >
                   <Mail size={20} />
                 </a>
               </div>
@@ -96,7 +111,10 @@ export default function Contact() {
                   />
                 </div>
                 
-                <button className="w-full py-5 bg-text-main text-charcoal rounded-2xl font-bold text-lg hover:bg-brand-blue hover:text-white transition-all duration-500 hover:shadow-[0_0_40px_rgba(124,108,90,0.3)]">
+                <button 
+                  onClick={playClick}
+                  className="w-full py-5 bg-text-main text-charcoal rounded-2xl font-bold text-lg hover:bg-brand-blue hover:text-white transition-all duration-500 hover:shadow-[0_0_40px_rgba(124,108,90,0.3)]"
+                >
                   Send Message
                 </button>
               </form>

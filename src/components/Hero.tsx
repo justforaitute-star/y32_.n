@@ -1,8 +1,10 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { useAudio } from "../context/SoundContext";
 
 export default function Hero() {
+  const { playClick } = useAudio();
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
   const { scrollY } = useScroll();
@@ -109,11 +111,17 @@ export default function Hero() {
           transition={{ delay: 1.8, duration: 0.8 }}
           className="flex flex-col md:flex-row items-center justify-center gap-4"
         >
-          <button className="px-8 py-4 bg-text-main text-charcoal rounded-full font-bold text-lg hover:bg-brand-blue hover:text-white transition-all duration-500 hover:scale-105 active:scale-95 group">
+          <button 
+            onClick={playClick}
+            className="px-8 py-4 bg-text-main text-charcoal rounded-full font-bold text-lg hover:bg-brand-blue hover:text-white transition-all duration-500 hover:scale-105 active:scale-95 group"
+          >
             Explore Vision
             <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">→</span>
           </button>
-          <button className="px-8 py-4 glass-panel rounded-full font-medium text-lg hover:bg-text-main/10 transition-all duration-300">
+          <button 
+            onClick={playClick}
+            className="px-8 py-4 glass-panel rounded-full font-medium text-lg hover:bg-text-main/10 transition-all duration-300"
+          >
             View Projects
           </button>
         </motion.div>
