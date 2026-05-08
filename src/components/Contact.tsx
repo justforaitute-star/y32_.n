@@ -5,7 +5,7 @@ export default function Contact() {
   return (
     <section id="contact" className="py-32">
       <div className="container mx-auto px-6">
-        <div className="glass-panel rounded-[40px] p-12 md:p-20 relative overflow-hidden">
+        <div className="liquid-glass rounded-[40px] p-12 md:p-20 relative overflow-hidden">
           {/* Background decoration */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue/10 blur-[120px] -mr-48 -mt-48" />
           
@@ -66,7 +66,7 @@ export default function Contact() {
                     <input 
                       type="text" 
                       placeholder="John Doe" 
-                      className="w-full bg-text-main/5 border border-text-main/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue transition-colors text-text-main placeholder:text-text-muted/50"
+                      className="w-full glass-panel border-text-main/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue/50 transition-colors text-text-main placeholder:text-text-muted/50"
                     />
                   </div>
                   <div className="space-y-2">
@@ -74,13 +74,13 @@ export default function Contact() {
                     <input 
                       type="email" 
                       placeholder="john@example.com" 
-                      className="w-full bg-text-main/5 border border-text-main/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue transition-colors text-text-main placeholder:text-text-muted/50"
+                      className="w-full glass-panel border-text-main/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue/50 transition-colors text-text-main placeholder:text-text-muted/50"
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs uppercase tracking-widest text-text-muted ml-1">Topic</label>
-                  <select className="w-full bg-text-main/5 border border-text-main/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue transition-colors text-text-main appearance-none cursor-pointer">
+                  <select className="w-full glass-panel border-text-main/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue/50 transition-colors text-text-main appearance-none cursor-pointer">
                     <option className="bg-charcoal">AI Integration</option>
                     <option className="bg-charcoal">Web Automation</option>
                     <option className="bg-charcoal">Collaboration</option>
@@ -92,7 +92,7 @@ export default function Contact() {
                   <textarea 
                     rows={4}
                     placeholder="Describe your vision..." 
-                    className="w-full bg-text-main/5 border border-text-main/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue transition-colors text-text-main placeholder:text-text-muted/50 resize-none"
+                    className="w-full glass-panel border-text-main/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-brand-blue/50 transition-colors text-text-main placeholder:text-text-muted/50 resize-none"
                   />
                 </div>
                 

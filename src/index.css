@@ -24,15 +24,19 @@
 .dark {
   --brand-blue: #d4c4b5;
   --brand-purple: #a68b6d;
-  --bg-color: #1c1917;
+  --bg-color: #121110;
   --text-main: #fdfaf6;
   --text-muted: #a68b6d;
 }
 
 @layer base {
   body {
-    @apply bg-charcoal text-text-main selection:bg-brand-blue/30 selection:text-text-main transition-colors duration-500;
+    @apply bg-charcoal text-text-main selection:bg-brand-blue/30 selection:text-text-main transition-colors duration-700;
     font-family: var(--font-sans);
+    background-image: 
+      radial-gradient(at 0% 0%, var(--brand-blue) 0%, transparent 40%),
+      radial-gradient(at 100% 100%, var(--brand-purple) 0%, transparent 40%);
+    background-attachment: fixed;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -42,7 +46,29 @@
 
 @layer components {
   .glass-panel {
-    @apply bg-text-main/5 backdrop-blur-xl border border-text-main/10;
+    @apply backdrop-blur-2xl bg-text-main/[0.03] border border-text-main/10 shadow-xl;
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.05),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .liquid-glass {
+    @apply backdrop-blur-2xl bg-text-main/[0.03] border border-text-main/10 shadow-xl transition-all duration-700 ease-out;
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.05),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+  }
+  
+  .dark .glass-panel {
+    @apply bg-white/[0.02] border-white/5;
+    box-shadow: 
+      0 8px 32px 0 rgba(0, 0, 0, 0.3),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
   }
   
   .text-gradient {

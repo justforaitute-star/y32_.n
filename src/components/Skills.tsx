@@ -41,7 +41,7 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1, duration: 0.8 }}
-              className="skill-card group p-8 rounded-3xl glass-panel hover:bg-text-main/[0.04] transition-all duration-500 cursor-default border-2 border-transparent hover:border-brand-blue/10"
+              className="skill-card group p-8 rounded-3xl liquid-glass hover:bg-text-main/[0.04] transition-all duration-700 cursor-default border-text-main/5 hover:border-brand-blue/30 hover:scale-[1.02] hover:-translate-y-2"
             >
               <div className={`w-14 h-14 rounded-2xl bg-text-main/5 flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-500`}>
                 <skill.icon className={`w-7 h-7 ${skill.color}`} />

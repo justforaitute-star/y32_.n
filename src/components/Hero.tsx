@@ -44,6 +44,32 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <div className="blob absolute top-1/4 left-1/4 w-96 h-96 bg-brand-blue/10 rounded-full blur-[120px]" />
         <div className="blob absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-purple/10 rounded-full blur-[120px]" />
+        
+        {/* Floating Liquid Glass Elements */}
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ 
+              opacity: [0.1, 0.3, 0.1],
+              scale: [1, 1.2, 1],
+              x: [0, Math.random() * 100 - 50, 0],
+              y: [0, Math.random() * 100 - 50, 0],
+              rotate: [0, 180, 360]
+            }}
+            transition={{ 
+              duration: 10 + Math.random() * 10, 
+              repeat: Infinity, 
+              delay: i * 2 
+            }}
+            className="absolute glass-panel rounded-[20%] w-32 h-32 blur-md"
+            style={{
+              top: `${20 + Math.random() * 60}%`,
+              left: `${10 + Math.random() * 80}%`,
+            }}
+          />
+        ))}
+
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03]" />
       </div>
 

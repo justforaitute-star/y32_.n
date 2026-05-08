@@ -59,7 +59,7 @@ export default function Projects() {
               {/* Soft Background Glow on Hover */}
               <div className="absolute -inset-4 bg-brand-blue/5 rounded-[40px] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -z-10" />
 
-              <div className="relative aspect-video rounded-[32px] overflow-hidden glass-panel mb-8 isolation-auto border border-text-main/5">
+              <div className="relative aspect-video rounded-[32px] overflow-hidden liquid-glass mb-8 isolation-auto border border-text-main/5">
                 <motion.div
                   className="w-full h-full"
                   transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}

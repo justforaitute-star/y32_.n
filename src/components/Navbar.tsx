@@ -74,7 +74,7 @@ export default function Navbar() {
     <motion.nav
       style={{
         backgroundColor,
-        backdropFilter: backdropBlur,
+        backdropFilter: "blur(24px)",
         borderColor: borderOpacity,
       }}
       className="fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300"
@@ -196,7 +196,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-charcoal border-b border-text-main/10 overflow-hidden"
+            className="md:hidden glass-panel border-b border-text-main/10 overflow-hidden"
           >
             <div className="flex flex-col p-6 space-y-4">
               {navItems.map((item) => (
