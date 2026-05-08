@@ -7,7 +7,18 @@ import Footer from "../components/Footer";
 import { cn } from "../lib/utils";
 import LiveTalkingSession from "../components/LiveTalkingSession";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+// Lazy initialization helper
+let aiInstance: GoogleGenAI | null = null;
+const getAI = () => {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key) {
+    throw new Error("GEMINI_API_KEY is not defined. Please set it in your environment variables.");
+  }
+  if (!aiInstance) {
+    aiInstance = new GoogleGenAI({ apiKey: key });
+  }
+  return aiInstance;
+};
 
 export default function Experimental() {
   const [messages, setMessages] = useState<{role: 'user' | 'ai', content: string}[]>([]);
@@ -30,6 +41,7 @@ export default function Experimental() {
     setIsLoading(true);
 
     try {
+      const ai = getAI();
       const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
         contents: [...messages, { role: 'user', content: userMsg }].map(m => ({
