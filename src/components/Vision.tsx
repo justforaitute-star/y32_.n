@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import React, { useRef } from "react";
 
 const visionStatements = [
   "Build a fully AI-powered PC assistant",
@@ -10,7 +10,13 @@ const visionStatements = [
   "Support family through technology"
 ];
 
-function VisionItem({ statement, index }: { statement: string; index: number }) {
+interface VisionItemProps {
+  statement: string;
+  index: number;
+  key?: React.Key;
+}
+
+function VisionItem({ statement, index }: VisionItemProps) {
   const itemRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: itemRef,

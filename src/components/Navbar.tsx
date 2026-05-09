@@ -8,10 +8,11 @@ import { useAudio } from "../context/SoundContext";
 
 const navItems = [
   { name: "About", href: "/#about" },
-  { name: "Skills", href: "/#skills" },
-  { name: "Projects", href: "/#projects" },
-  { name: "Vision", href: "/#vision" },
-  { name: "Exprmntl", href: "/experimental", icon: Flask },
+  { name: "Arch", href: "/archive" },
+  { name: "Vlt", href: "/vault" },
+  { name: "Nxs", href: "/nexus" },
+  { name: "Mvr", href: "/multiverse" },
+  { name: "Exp", href: "/experimental", icon: Flask },
 ];
 
 export default function Navbar() {

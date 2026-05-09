@@ -74,6 +74,28 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-linear-to-r from-text-main via-text-main/80 to-text-main/50;
   }
+
+  .reveal-down {
+    @apply overflow-hidden;
+  }
+
+  .reveal-down > * {
+    @apply animate-[reveal-down_1.5s_cubic-bezier(0.77,0,0.175,1)_forwards];
+  }
+}
+
+@keyframes reveal-down {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
 /* Custom scrollbar */

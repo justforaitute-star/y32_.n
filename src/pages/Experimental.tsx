@@ -2,10 +2,19 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Send, Bot, Sparkles, Terminal, Activity, Brain, Mic } from "lucide-react";
 import { GoogleGenAI } from "@google/genai";
+import { Player } from "@lottiefiles/react-lottie-player";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { cn } from "../lib/utils";
 import LiveTalkingSession from "../components/LiveTalkingSession";
+
+// Lottie Animation Assets
+const animations = {
+  brain: "https://assets9.lottiefiles.com/packages/lf20_m6cu9rga.json",
+  scanning: "https://assets3.lottiefiles.com/packages/lf20_hzfmxvpx.json",
+  pulse: "https://assets5.lottiefiles.com/packages/lf20_TkwY4m.json",
+  neural: "https://assets10.lottiefiles.com/packages/lf20_6n0m1m.json"
+};
 
 // Lazy initialization helper
 let aiInstance: GoogleGenAI | null = null;
@@ -88,8 +97,16 @@ export default function Experimental() {
             viewport={{ once: true }}
             className="lg:col-span-4 space-y-8"
           >
-            <div className="glass-panel rounded-3xl p-8">
-              <div className="flex items-center gap-3 mb-8">
+            <div className="glass-panel rounded-3xl p-8 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 opacity-10 pointer-events-none">
+                <Player 
+                  autoplay
+                  loop
+                  src={animations.brain}
+                  style={{ height: '100%', width: '100%' }}
+                />
+              </div>
+              <div className="flex items-center gap-3 mb-8 relative z-10">
                 <Activity className="text-brand-blue w-5 h-5" />
                 <h2 className="text-xl font-display font-medium text-text-main">Neural Core Status</h2>
               </div>
@@ -132,23 +149,14 @@ export default function Experimental() {
                 Early prototype of a natural language filesystem interface. Currently in "Thinking" phase.
               </p>
               
-              {/* Generative Waveform Mockup */}
-              <div className="h-20 flex items-center justify-center gap-1 mb-6 px-4">
-                {[...Array(20)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    animate={{ 
-                      height: [10, 40, 15, 30, 10],
-                    }}
-                    transition={{ 
-                      duration: 1.5, 
-                      repeat: Infinity, 
-                      delay: i * 0.1,
-                      ease: "easeInOut"
-                    }}
-                    className="w-1 bg-brand-blue/40 rounded-full"
-                  />
-                ))}
+              {/* Lottie Thinking Animation */}
+              <div className="h-24 flex items-center justify-center mb-6">
+                <Player 
+                  autoplay
+                  loop
+                  src={animations.neural}
+                  style={{ height: '100%', width: '100%', opacity: 0.6 }}
+                />
               </div>
 
               <button className="w-full py-4 glass-panel rounded-2xl flex items-center justify-center gap-2 text-sm font-medium hover:bg-text-main/10 transition-colors">
@@ -203,7 +211,10 @@ export default function Experimental() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-8 flex flex-col h-[700px] glass-panel rounded-[40px] overflow-hidden border-2 border-brand-blue/10"
+            whileHover={{ rotateY: -2, rotateX: 2 }}
+            transition={{ type: "spring", stiffness: 100 }}
+            className="lg:col-span-8 flex flex-col h-[700px] glass-panel rounded-[40px] overflow-hidden border-2 border-brand-blue/10 shadow-2xl relative z-10"
+            style={{ perspective: "1000px", transformStyle: "preserve-3d" }}
           >
             {/* Header */}
             <div className="p-6 border-b border-text-main/10 flex items-center justify-between bg-text-main/[0.02]">
@@ -229,7 +240,14 @@ export default function Experimental() {
             >
               {messages.length === 0 && (
                 <div className="h-full flex flex-col items-center justify-center text-center p-10 opacity-30">
-                  <Bot size={48} className="mb-4" />
+                  <div className="w-48 h-48 mb-4">
+                    <Player 
+                      autoplay
+                      loop
+                      src={animations.scanning}
+                      style={{ height: '100%', width: '100%' }}
+                    />
+                  </div>
                   <p className="text-lg font-display">ARK is waiting...</p>
                   <p className="text-sm">Initiate communication via the terminal below.</p>
                 </div>

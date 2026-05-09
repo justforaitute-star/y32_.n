@@ -27,6 +27,9 @@ export default function About() {
     restDelta: 0.001
   });
 
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const imageRotate = useTransform(scrollYProgress, [0, 1], [0, 5]);
+
   const mainText = "I build AI agents using AI agents. I’m a gamer and a creative developer exploring automation, AI systems, and future technology.";
   const words = mainText.split(" ");
 
@@ -74,6 +77,7 @@ export default function About() {
           </div>
           
           <motion.div 
+            style={{ y: imageY, rotate: imageRotate }}
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}

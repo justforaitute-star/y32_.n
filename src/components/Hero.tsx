@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from "motion/react";
-import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "motion/react";
+import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useAudio } from "../context/SoundContext";
 
@@ -11,6 +11,28 @@ export default function Hero() {
   
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+
+  // 3D Tilt Logic
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [15, -15]), { stiffness: 100, damping: 30 });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-15, 15]), { stiffness: 100, damping: 30 });
+
+  function handleMouseMove(e: React.MouseEvent) {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    mouseX.set((e.clientX - centerX) / rect.width);
+    mouseY.set((e.clientY - centerY) / rect.height);
+  }
+
+  function handleMouseLeave() {
+    mouseX.set(0);
+    mouseY.set(0);
+  }
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -40,7 +62,10 @@ export default function Hero() {
   return (
     <section 
       ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      style={{ perspective: "1000px" }}
     >
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
@@ -76,23 +101,37 @@ export default function Hero() {
       </div>
 
       <motion.div 
-        style={{ y: y1, opacity }}
+        style={{ 
+          y: y1, 
+          opacity,
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d"
+        }}
         className="container mx-auto px-6 relative z-10 text-center"
       >
         <div className="overflow-hidden mb-4">
-          <h2 className="hero-line text-sm uppercase tracking-[0.4em] text-text-muted font-medium">
+          <motion.h2 
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1], delay: 0.5 }}
+            className="text-sm uppercase tracking-[0.4em] text-text-muted font-medium"
+          >
             Building with Intelligence
-          </h2>
+          </motion.h2>
         </div>
         
         <div className="overflow-hidden mb-8">
-          <h1 
+          <motion.h1 
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            transition={{ duration: 1.2, ease: [0.77, 0, 0.175, 1], delay: 0.7 }}
             ref={textRef}
-            className="hero-line text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.9]"
+            className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.9]"
           >
             Quietly Building <br />
             <span className="text-gradient">The Future.</span>
-          </h1>
+          </motion.h1>
         </div>
 
         <motion.p 
